@@ -1,13 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>eu.justas.jweather</groupId>
+	<groupId>eu.justas</groupId>
 	<artifactId>jweather</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>jweather Jersey Webapp</name>
-
-
+	<name>JEE weather application (Rest, Soap showcase)</name>
 
 	<build>
 		<finalName>jweather</finalName>
@@ -250,4 +248,5 @@
 			<layout>default</layout>
 		</pluginRepository>
 	</pluginRepositories>
+	<url>https://github.com/justas-eu/jee-weather</url>
 </project>

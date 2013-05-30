@@ -41,6 +41,7 @@ public class WeatherGetterWorker implements Worker {
 				if (allowUpdate(cityEnum)) {
 					JSONObject wundergroundJSON = weatherGetter.get3rdPartyData(cityEnum);
 					weather = weatherConverter.parseResultToWeather(wundergroundJSON);
+					if (weather != null) WeatherKeeper.getInstance().updateDB(weather, cityEnum);
 				}
 
 				 Thread.sleep(delaySec * 1000);				
@@ -52,7 +53,6 @@ public class WeatherGetterWorker implements Worker {
 			} catch (InterruptedException e) {
 				log.error("InterruptedException" , e);
 			}
-			if (weather != null) WeatherKeeper.getInstance().updateDB(weather, cityEnum);
 		}
 	}
 	

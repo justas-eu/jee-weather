@@ -1,0 +1,12 @@
+
+.project
+
+.classpath
+
+.settings/*
+
+target/*
+
+release/*
+
+.metadata/*
