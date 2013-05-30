@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="/pages/template/common/layout.xhtml">
+
+		<ui:define name="content">
+			<h:outputText value="#{messages.welcomeMessage}" />
+
+			<h:form>
+
+				<script src="http://maps.google.com/maps/api/js?sensor=false"
+					type="text/javascript"></script>
+
+				<div style="display: block; width: 800px; margin: auto;">
+					<p:gmap center="55.1246, 23.9493" zoom="7" type="HYBRID"
+						model="#{mapBean.advancedModel}" style="width:800px;height:600px">
+
+						<p:ajax event="overlaySelect" listener="#{mapBean.onMarkerSelect}" />
+
+						<p:gmapInfoWindow>
+							<p:outputPanel
+								style="text-align:center;display:block;margin:auto:">
+								<p:graphicImage value="/pics/#{mapBean.marker.data.city}.png" />
+								<br />
+								<h:outputText value="#{mapBean.marker.title}" />
+								<br />
+								<h:outputText value="#{mapBean.marker.data.temperature}" />
+						°C
+						<br />
+								<h:outputText value="#{mapBean.marker.data.weatherDescription}" />
+								<br />
+								<h:outputText value="#{messages.windSpeed}" />:
+						<h:outputText
+									value="#{mapBean.marker.data.weatherObj.current_observation.wind_kph}" />
+						km/h
+					</p:outputPanel>
+
+						</p:gmapInfoWindow>
+					</p:gmap>
+				</div>
+
+			</h:form>
+
+			<h:form>
+				<div style="display: block; width: 800px; margin: auto;">
+
+					<p:dataTable var="weather" value="#{mapBean.weather}">
+						<p:column headerText="#{messages.city}">
+							<h:outputLink id="openDialogLink" value="javascript:void(0)"
+								onclick="dlg#{weather.city}.show()">
+								<h:outputText value="#{weather.city}" />
+							</h:outputLink>
+
+							<p:dialog id="picture" widgetVar="dlg#{weather.city}"
+								header="#{messages.weatherInformationFor} #{weather.city}" width="525" resizable="false"
+								showEffect="clip" hideEffect="clip">
+
+								<p:graphicImage value="/pics/#{weather.city}.png" />
+								<br />
+								<h:outputText value="#{weather.temperature}" />
+						°C
+						<br />
+								<h:outputText value="#{weather.weatherDescription}" />
+								<br />
+								<h:outputText value="#{messages.windSpeed}" />:
+						<h:outputText
+									value="#{weather.weatherObj.current_observation.wind_kph}" />
+						km/h
+								<br />
+								<img src="#{weather.iconUrl}"
+									alt="#{weather.weatherDescription}"
+									title="#{weather.weatherDescription}" width="25" height="25" />
+								<br />
+								<h:outputText value="#{messages.feelslike}" />: 
+								<h:outputText value="#{weather.weatherObj.current_observation.feelslike_c}" /> °C
+								<br />
+								<h:outputText value="#{messages.visibility}" />: 
+								<h:outputText value="#{weather.weatherObj.current_observation.visibility_km}" /> km
+								<br />
+								<h:outputText value="#{messages.humidity}" />: 
+								<h:outputText value="#{weather.humidity}" />
+								<br />
+								<h:outputText value="#{messages.observationTime}" />: 
+								<h:outputText value="#{weather.observationTime}" />
+								<br />																
+
+							</p:dialog>
+
+						</p:column>
+						<p:column>
+							<img src="#{weather.iconUrl}" alt="#{weather.weatherDescription}"
+								title="#{weather.weatherDescription}" width="25" height="25" />
+						</p:column>
+						<p:column headerText="#{messages.weatherDescription}">
+							<h:outputText value="#{weather.weatherDescription}" />
+						</p:column>
+						<p:column headerText="#{messages.temperature}">
+							<h:outputText value="#{weather.temperature}" />°C
+			</p:column>
+						<p:column headerText="#{messages.humidity}">
+							<h:outputText value="#{weather.humidity}" />
+						</p:column>
+						<p:column headerText="#{messages.windDirection}">
+							<h:outputText value="#{weather.windDirection}" />
+						</p:column>
+						<p:column headerText="#{messages.windSpeed}">
+							<h:outputText
+								value="#{weather.weatherObj.current_observation.wind_kph}" />km/h
+			</p:column>
+
+					</p:dataTable>
+				</div>
+			</h:form>
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

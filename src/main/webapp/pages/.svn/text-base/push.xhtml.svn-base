@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/pages/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+
+
+			<h:form>
+			 <p:log />
+				<p:panel id="panel" header="Push notification"
+					style="margin-bottom:10px;">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+
+					<h:panelGrid columns="3">
+						<h:outputLabel for="username" value="Username: *" />
+						<p:inputText id="username"
+							value="#{pushNotificationBean.username}" required="true"
+							label="Username">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="username" />
+
+						<h:outputLabel for="text" value="Text: *" />
+						<p:inputText id="text" value="#{pushNotificationBean.text}"
+							required="true" label="text" />
+						<p:message for="text" />
+					</h:panelGrid>
+				</p:panel>
+
+				<p:commandButton value="Send" update="panel,display" id="ajax"
+					actionListener="#{pushNotificationBean.sendText}" />
+
+
+				<p:panel id="display" header="Information" style="margin-top:10px;">
+					<h:panelGrid columns="2">
+						<h:outputText value="Username: " />
+						<h:outputText value="#{pushNotificationBean.username}" />
+
+						<h:outputText value="Text: " />
+						<h:outputText value="#{pushNotificationBean.text}" />
+					</h:panelGrid>
+				</p:panel>
+
+
+				<p:dataTable var="user" value="#{pushNotificationBean.users}" >
+				
+				
+					<p:column headerText="ID">
+						<h:outputText value="#{user.id}" />
+					</p:column>			
+						
+					<p:column headerText="Username"  sortBy="#{user.username}">
+						<h:outputText value="#{user.username}" />
+					</p:column>
+
+					<p:column headerText="Email">
+						<h:outputText value="#{user.email}" />
+					</p:column>
+
+					<p:column headerText="Phone no">
+						<h:outputText value="#{user.phone}" />
+					</p:column>
+
+					<p:column headerText="Device Type">
+						<h:outputText value="#{user.deviceType}" />
+					</p:column>
+
+					<p:column headerText="Device Registration Id">
+						<h:outputText value="#{user.deviceRegistrationId}" />
+					</p:column>
+
+				</p:dataTable>
+
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
