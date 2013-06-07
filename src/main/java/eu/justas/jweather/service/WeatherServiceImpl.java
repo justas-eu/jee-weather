@@ -5,11 +5,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import eu.justas.jweather.data.IWeatherConverter;
-import eu.justas.jweather.data.IWeatherGetter;
 import eu.justas.jweather.data.WeatherKeeper;
 import eu.justas.jweather.domain.City;
 import eu.justas.jweather.domain.Weather;
@@ -20,12 +17,6 @@ import eu.justas.jweather.exception.DataNotStoredException;
 public class WeatherServiceImpl implements IWeatherService {
 
 	private static final Logger log = LoggerFactory.getLogger(WeatherServiceImpl.class);
-
-	@Autowired
-	private IWeatherConverter weatherConverter;
-
-	@Autowired
-	private IWeatherGetter weatherGetter;
 
 	@Override
 	public List<Weather> returnWeather(String city) {

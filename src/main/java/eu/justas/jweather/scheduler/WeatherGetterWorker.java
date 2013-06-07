@@ -8,6 +8,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +24,11 @@ public class WeatherGetterWorker implements Worker {
 	private static final Logger log = LoggerFactory.getLogger(WeatherGetterWorker.class);
 	
 	@Autowired
+    @Qualifier("wundergroundWeatherConverter")
 	private IWeatherConverter weatherConverter;
 
 	@Autowired
+    @Qualifier("wundergroundWeatherGetter")
 	private IWeatherGetter weatherGetter;	
 	
 	@Value("${api.getter.delay}")
@@ -39,8 +42,8 @@ public class WeatherGetterWorker implements Worker {
 				
 				//respect the api limit
 				if (allowUpdate(cityEnum)) {
-					JSONObject wundergroundJSON = weatherGetter.get3rdPartyData(cityEnum);
-					weather = weatherConverter.parseResultToWeather(wundergroundJSON);
+					JSONObject weatherJSON = weatherGetter.get3rdPartyData(cityEnum);
+					weather = weatherConverter.parseResultToWeather(weatherJSON);
 					if (weather != null) WeatherKeeper.getInstance().updateDB(weather, cityEnum);
 				}
 

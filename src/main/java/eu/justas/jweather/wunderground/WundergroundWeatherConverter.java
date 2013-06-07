@@ -4,22 +4,17 @@ import java.util.Date;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
 import eu.justas.jweather.data.IWeatherConverter;
-import eu.justas.jweather.data.IWeatherGetter;
 import eu.justas.jweather.domain.Weather;
 import eu.justas.jweather.domain.gen.WeatherObj;
 
 
-@Component
+@Component("wundergroundWeatherConverter")
 public class WundergroundWeatherConverter implements IWeatherConverter {
-
-	@Autowired
-	private IWeatherGetter weatherGetter;
 	
 	public Weather parseResultToWeather(JSONObject wundergroundJSON) throws JSONException {
 

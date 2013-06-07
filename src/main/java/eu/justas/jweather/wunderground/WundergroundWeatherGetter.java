@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import eu.justas.jweather.data.IWeatherGetter;
 import eu.justas.jweather.domain.City;
 
-@Component
+@Component("wundergroundWeatherGetter")
 public class WundergroundWeatherGetter implements IWeatherGetter {
 
 	private static final Logger log = LoggerFactory.getLogger(WundergroundWeatherGetter.class);

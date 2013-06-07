@@ -5,18 +5,23 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import eu.justas.jweather.domain.Weather;
+import eu.justas.jweather.scheduler.SchedulerService;
 
 public class WeatherEndpointTest extends AbstractApiTest {
 
 	//TODO: more tests
+
+	@Autowired
+	private SchedulerService schedulerService;	
 	
 	@Test
     public void testWeatherVilnius() throws InterruptedException {
 
-		Thread.sleep(3500);
-
+		schedulerService.doSchedule();
+		
 		List<String> cities = new ArrayList<String>();
 		cities.add("vilnius");		
 		
