@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import eu.justas.jweather.data.WeatherKeeper;
@@ -14,11 +15,13 @@ import eu.justas.jweather.exception.CityNotSupportedException;
 import eu.justas.jweather.exception.DataNotStoredException;
 
 @Component
-public class WeatherServiceImpl implements IWeatherService {
+public class WeatherService {
 
-	private static final Logger log = LoggerFactory.getLogger(WeatherServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(WeatherService.class);
+	
+	@Autowired
+	WeatherKeeper weatherKeeper;
 
-	@Override
 	public List<Weather> returnWeather(String city) {
 		
 		List<Weather> listOfWeather = new ArrayList<Weather>();
@@ -30,7 +33,7 @@ public class WeatherServiceImpl implements IWeatherService {
 				throw new CityNotSupportedException("City not supported: " + city);
 			}
 
-			Weather weather = WeatherKeeper.getInstance().getWeatherForCity(cityEnum);
+			Weather weather = weatherKeeper.getWeatherForCity(cityEnum);
 
 			if (weather == null) {
 				log.error("Weather observation for city is not available: " + city);
@@ -42,7 +45,7 @@ public class WeatherServiceImpl implements IWeatherService {
 		} else {
 
 			for (City cityEnum : City.values()) {
-				Weather weather = WeatherKeeper.getInstance().getWeatherForCity(cityEnum);
+				Weather weather = weatherKeeper.getWeatherForCity(cityEnum);
 				if (weather != null) listOfWeather.add(weather);
 			}
 

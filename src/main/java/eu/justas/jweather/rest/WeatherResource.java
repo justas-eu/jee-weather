@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import eu.justas.jweather.domain.Weather;
-import eu.justas.jweather.service.IWeatherService;
+import eu.justas.jweather.service.WeatherService;
 
 @Component
 @Path("/weather")
 public class WeatherResource {
 
 	@Autowired
-	private IWeatherService weatherService;
+	private WeatherService weatherService;
 
 	@GET
 	@Path("/{city}")

@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.justas.jweather.domain.Weather;
-import eu.justas.jweather.service.IWeatherService;
+import eu.justas.jweather.service.WeatherService;
 
 @ManagedBean(name = "mapBean")
 @SessionScoped
@@ -28,7 +28,7 @@ public class MapBean implements Serializable {
 	private static final Logger log = LoggerFactory.getLogger(MapBean.class);
 
 	@ManagedProperty(value = "#{weatherServiceImpl}")
-	private IWeatherService weatherService;
+	private WeatherService weatherService;
 
 	private MapModel advancedModel;
 
@@ -67,7 +67,7 @@ public class MapBean implements Serializable {
 		return marker;
 	}
 
-	public void setWeatherService(IWeatherService weatherService) {
+	public void setWeatherService(WeatherService weatherService) {
 		this.weatherService = weatherService;
 	}
 }

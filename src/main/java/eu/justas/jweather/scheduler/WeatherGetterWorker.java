@@ -31,6 +31,9 @@ public class WeatherGetterWorker implements Worker {
     @Qualifier("wundergroundWeatherGetter")
 	private IWeatherGetter weatherGetter;	
 	
+	@Autowired
+	WeatherKeeper weatherKeeper;
+	
 	@Value("${api.getter.delay}")
 	int delaySec;		
 	
@@ -44,7 +47,7 @@ public class WeatherGetterWorker implements Worker {
 				if (allowUpdate(cityEnum)) {
 					JSONObject weatherJSON = weatherGetter.get3rdPartyData(cityEnum);
 					weather = weatherConverter.parseResultToWeather(weatherJSON);
-					if (weather != null) WeatherKeeper.getInstance().updateDB(weather, cityEnum);
+					if (weather != null) weatherKeeper.updateDB(weather, cityEnum);
 				}
 
 				 Thread.sleep(delaySec * 1000);				
@@ -60,7 +63,7 @@ public class WeatherGetterWorker implements Worker {
 	}
 	
 	private boolean allowUpdate(City city) {
-		Weather weather = WeatherKeeper.getInstance().getWeatherForCity(city);
+		Weather weather = weatherKeeper.getWeatherForCity(city);
 		if (weather == null) return true;
 		long observationAge = (((new Date()).getTime()) - weather.getObservationFetchTime().getTime()) / (1000*60);
 		log.debug(" Observation age: "  + observationAge + " min");
