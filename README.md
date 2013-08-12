@@ -1,4 +1,11 @@
 jee-weather
 ===========
 
-JEE weather application (Rest, Soap showcase)
+Java Spring, JSF web application (Rest, Soap showcase)
+
+Technologies
+===========
+String
+JSF
+Jersey
+PrimaFaces
