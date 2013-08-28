@@ -27,7 +27,7 @@ public class MapBean implements Serializable {
 
 	private static final Logger log = LoggerFactory.getLogger(MapBean.class);
 
-	@ManagedProperty(value = "#{weatherServiceImpl}")
+	@ManagedProperty(value = "#{weatherService}")
 	private WeatherService weatherService;
 
 	private MapModel advancedModel;
