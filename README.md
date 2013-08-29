@@ -46,10 +46,10 @@ SOAP API:
 - Application provides WSDL for SOAP service (/soap/WeatherSOAP?wsdl).
 
 REST API:
-GET /weather/{city} - returns weather data for a given city.
-GET /weather - return list of weather conditions for supported locations.
-REST service response format is JSON. 
-API wadl /rest/application.wadl
+- GET /weather/{city} - returns weather data for a given city.
+- GET /weather - return list of weather conditions for supported locations.
+- REST service response format is JSON. 
+- API wadl /rest/application.wadl
 
 
 
