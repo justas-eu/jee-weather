@@ -1,8 +1,3 @@
-LIVE
-===========
-This is [live demo](http://tomcat.justas.eu:888/ "JWeather").
-
-
 jee-weather
 ===========
 
